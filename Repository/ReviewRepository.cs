@@ -1,10 +1,11 @@
 ﻿using BOOKSTORE.Data;
+using BOOKSTORE.Interface;
 using BOOKSTORE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BOOKSTORE.Repository
 {
-    public class ReviewRepository
+    public class ReviewRepository : IRepository<int, Review>
     {
         private readonly BookStoreDBContext _bookStoreDBContext;
 
