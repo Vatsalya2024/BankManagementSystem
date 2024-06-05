@@ -26,7 +26,7 @@ namespace BOOKSTORE.Repository
             var orderItem = await Get(key);
             if (orderItem == null)
             {
-                throw new Exception("OrderItem not found.");
+                throw new ApplicationException("OrderItem not found.");
             }
             else
             {

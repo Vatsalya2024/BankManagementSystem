@@ -19,7 +19,7 @@ namespace BOOKSTORE.Repository
             var category = _bookStoreDBContext.Categories.FirstOrDefault(c => c.Name == item.Name);
             if (category != null)
             {
-                throw new Exception("Category already exists.");
+                throw new ApplicationException();
             }
             _bookStoreDBContext.Categories.Add(item);
             await _bookStoreDBContext.SaveChangesAsync();
@@ -31,7 +31,7 @@ namespace BOOKSTORE.Repository
             var category = await Get(key);
             if (category == null)
             {
-                throw new Exception("Category not found.");
+                throw new ApplicationException("Category not found.");
             }
             else
             {

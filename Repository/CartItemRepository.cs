@@ -1,4 +1,5 @@
 ﻿using BOOKSTORE.Data;
+using BOOKSTORE.Exception;
 using BOOKSTORE.Interface;
 using BOOKSTORE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ namespace BOOKSTORE.Repository
             var cartItem = await Get(key);
             if (cartItem == null)
             {
-                throw new Exception("CartItem not found.");
+                throw new NoCartItemException();
             }
             else
             {
@@ -35,7 +36,7 @@ namespace BOOKSTORE.Repository
                 return cartItem;
             }
 
-            throw new NotImplementedException();
+            throw new NoCartItemException();
         }
 
         public async Task<CartItem?> Get(int key)
@@ -46,9 +47,8 @@ namespace BOOKSTORE.Repository
             {
                 return getCartItem;
             }
-            return null;
 
-            //throw new CartItemNotFoundException();
+            throw new NoCartItemException();
         }
 
         public Task<List<CartItem>?>? GetAll()
@@ -56,7 +56,7 @@ namespace BOOKSTORE.Repository
             var getCartItems = _bookStoreDBContext.CartItems.Include(a => a.Book).ToListAsync();
             if (getCartItems == null)
             {
-                return null;
+                throw new NoCartItemException();
             }
             return getCartItems;
         }

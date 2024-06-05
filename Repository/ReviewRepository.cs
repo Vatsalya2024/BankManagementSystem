@@ -1,10 +1,12 @@
 ﻿using BOOKSTORE.Data;
+using BOOKSTORE.Exception;
+using BOOKSTORE.Interface;
 using BOOKSTORE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BOOKSTORE.Repository
 {
-    public class ReviewRepository
+    public class ReviewRepository : IRepository<int, Review>
     {
         private readonly BookStoreDBContext _bookStoreDBContext;
 
@@ -22,9 +24,9 @@ namespace BOOKSTORE.Repository
         public async Task<Review?> Delete(int key)
         {
             var review = await Get(key);
-            if (review== null)
+            if (review == null)
             {
-                throw new Exception();
+                throw new NoReviewException();
             }
             else
             {

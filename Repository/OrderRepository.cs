@@ -25,7 +25,7 @@ namespace BOOKSTORE.Repository
                 var order = await Get(key);
                 if (order == null)
                 {
-                    throw new Exception();
+                    throw new ApplicationException();
                 }
                 else
                 {

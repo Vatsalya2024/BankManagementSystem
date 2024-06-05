@@ -1,4 +1,5 @@
 ﻿using BOOKSTORE.Data;
+using BOOKSTORE.Exception;
 using BOOKSTORE.Interface;
 using BOOKSTORE.Models.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,7 @@ namespace BOOKSTORE.Repository
             var bookCategory = await Get(key);
             if (bookCategory == null)
             {
-                throw new Exception("BookCategory not found.");
+                throw new NoSuchBookException();
             }
             else
             {

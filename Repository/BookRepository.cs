@@ -1,4 +1,5 @@
 ﻿using BOOKSTORE.Data;
+using BOOKSTORE.Exception;
 using BOOKSTORE.Interface;
 using BOOKSTORE.Models.Entities;
 using Microsoft.AspNetCore.Http.HttpResults;
@@ -18,9 +19,9 @@ namespace BOOKSTORE.Repository
         public async Task<Book> Add(Book item)
         {
             var book = _bookStoreDBContext.Books.FirstOrDefault(b => b.Title == item.Title);
-            if (book!=null)
+            if (book==null)
             {
-                throw new Exception();
+                throw new NoSuchBookException();
                 
             }
             _bookStoreDBContext.Books.Add(item);
@@ -34,7 +35,7 @@ namespace BOOKSTORE.Repository
             var book = await Get(key);
             if (book == null)
             {
-                throw new Exception();
+                throw new NoSuchBookException();
             }
             else
             {
@@ -54,7 +55,7 @@ namespace BOOKSTORE.Repository
             {
                 return getbook;
             }
-            throw new NotImplementedException();
+            throw new NoSuchBookException();
         }
 
         public async Task<List<Book?>> GetAll()

@@ -17,7 +17,7 @@ namespace BOOKSTORE.Repository
         {
           var user=_bookStoreDBContext.Users.FirstOrDefault(b=>b.Username == item.Username);
             if (user == null) {
-                throw new Exception();
+                throw new ApplicationException();
             }
             _bookStoreDBContext.Users.Add(user);
             await _bookStoreDBContext.SaveChangesAsync();
@@ -29,7 +29,7 @@ namespace BOOKSTORE.Repository
             var user = await Get(key);
             if (user == null)
             {
-                throw new Exception();
+                throw new ApplicationException();
             }
             else
             {
