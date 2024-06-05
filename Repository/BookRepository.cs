@@ -54,14 +54,12 @@ namespace BOOKSTORE.Repository
             {
                 return getbook;
             }
-            return null;
-            
-            //throw new BookNotFoundException();
+            throw new NotImplementedException();
         }
 
-        public Task<List<Book>?>? GetAll()
+        public async Task<List<Book?>> GetAll()
         {
-            var getbooks = _bookStoreDBContext.Books.Include(a => a.BookCategories).Include(b => b.CartItems).Include(c => c.OrderItems).Include(d => d.Reviews).ToListAsync();
+            var getbooks =  await _bookStoreDBContext.Books.Include(a => a.BookCategories).Include(b => b.CartItems).Include(c => c.OrderItems).Include(d => d.Reviews).ToListAsync();
             if (getbooks == null)
             {
                 return null;
