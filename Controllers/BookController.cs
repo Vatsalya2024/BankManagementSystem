@@ -2,6 +2,8 @@
 using BOOKSTORE.Models.Entities;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BOOKSTORE.Controllers
 {
@@ -48,6 +50,10 @@ namespace BOOKSTORE.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<Book>> UpdateBook(int id, [FromBody] Book book)
         {
+            if (id != book.BookId)
+            {
+                return BadRequest("Book ID mismatch");
+            }
 
             try
             {
@@ -74,5 +80,9 @@ namespace BOOKSTORE.Controllers
                 return NotFound(ex.Message);
             }
         }
+
+       
+
+       
     }
 }
