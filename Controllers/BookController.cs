@@ -33,6 +33,22 @@ namespace BOOKSTORE.Controllers
 
         }
 
+        [HttpGet]
+        [Route("SearchBook")]
+        public async Task<ActionResult<List<Book>>> GetBooks(string book)
+        {
+            try
+            {
+                var books = await _bookService.SearchBook(book);
+                return books;
+            }
+            catch (ApplicationException ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+        }
+
         [HttpPost]
         public async Task<ActionResult<Book>> AddBook([FromBody] Book book)
         {

@@ -15,11 +15,7 @@ namespace BOOKSTORE.Repository
         }
         public async Task<User> Add(User item)
         {
-          var user=_bookStoreDBContext.Users.FirstOrDefault(b=>b.Username == item.Username);
-            if (user == null) {
-                throw new ApplicationException();
-            }
-            _bookStoreDBContext.Users.Add(user);
+            _bookStoreDBContext.Users.Add(item);
             await _bookStoreDBContext.SaveChangesAsync();
             return item;
         }
@@ -54,7 +50,7 @@ namespace BOOKSTORE.Repository
 
         public Task<List<User>?> GetAll()
         {
-            var getusers = _bookStoreDBContext.Users.Include(a => a.Username).ToListAsync();
+            var getusers = _bookStoreDBContext.Users.ToListAsync();
             if (getusers == null)
             {
                 return null;

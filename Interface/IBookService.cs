@@ -11,5 +11,6 @@ namespace BOOKSTORE.Interface
         public Task<Book> GetBookById(int id);
         public Task<Book> DeleteBook(int id);
         public Task<Book> UpdateBook(Book book);
+        public Task<List<Book>> SearchBook(string bookName);
     }
 }

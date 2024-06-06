@@ -1,4 +1,5 @@
-﻿using BOOKSTORE.Models.Entities;
+﻿using BOOKSTORE.Models.DTOs;
+using BOOKSTORE.Models.Entities;
 
 namespace BOOKSTORE.Interface
 {
@@ -8,7 +9,9 @@ namespace BOOKSTORE.Interface
         public Task<List<User>> GetAllUsers();
         public Task<User> GetUserById(int id);
         public Task<bool> DeleteUser(int id);
-        public Task<User> UpdateUser(User user);
+        public Task<Login> Login(Login user);
+        public Task<Register> Register(Register user);
+        //public Task<User> UpdateUser(User user);
 
     }
 }

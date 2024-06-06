@@ -19,7 +19,7 @@ namespace BOOKSTORE.Repository
         public async Task<Book> Add(Book item)
         {
             var book = _bookStoreDBContext.Books.FirstOrDefault(b => b.Title == item.Title);
-            if (book==null)
+            if (book!=null)
             {
                 throw new NoSuchBookException();
                 
@@ -60,7 +60,7 @@ namespace BOOKSTORE.Repository
 
         public async Task<List<Book?>> GetAll()
         {
-            var getbooks =  await _bookStoreDBContext.Books.Include(a => a.BookCategories).Include(b => b.CartItems).Include(c => c.OrderItems).Include(d => d.Reviews).ToListAsync();
+            var getbooks =  await _bookStoreDBContext.Books.Include(b => b.CartItems).Include(c => c.OrderItems).Include(d => d.Reviews).ToListAsync();
             if (getbooks == null)
             {
                 return null;

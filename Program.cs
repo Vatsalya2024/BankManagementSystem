@@ -20,7 +20,6 @@ builder.Services.AddDbContext<BookStoreDBContext>(options => {
     });
 
 builder.Services.AddScoped<IRepository<int, Book>, BookRepository>();
-builder.Services.AddScoped<IRepository<int, BookCategory>, BookCategoryRepository>();
 builder.Services.AddScoped<IRepository<int, CartItem>, CartItemRepository>();
 builder.Services.AddScoped<IRepository<int, Category>, CategoryRepository>();
 builder.Services.AddScoped<IRepository<int, Order>, OrderRepository>();
@@ -35,6 +34,7 @@ builder.Services.AddScoped<IOrderItemService, OrderItemService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IReviewService, ReviewService>();
 builder.Services.AddScoped<IUser, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 
 
 var app = builder.Build();

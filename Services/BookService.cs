@@ -16,7 +16,9 @@ namespace BOOKSTORE.Services
         }
         public async Task<Book> AddBook(Book book)
         {
-            return await _bookRepository.Add(book);
+            var books= await _bookRepository.Add(book);
+            
+            return books;
         }
 
         public async Task<Book> DeleteBook(int id)
@@ -48,6 +50,17 @@ namespace BOOKSTORE.Services
             throw new NoSuchBookException();
         }
 
+        public async Task<List<Book>> SearchBook(string bookName)
+        {
+            var books = await _bookRepository.GetAll();
+            var book = books.Where(e => e.Title == bookName).ToList();
+            if(book != null)
+            {
+                return book;
+            }
+            throw new NoSuchBookException();
+        }
+
         public async Task<Book> UpdateBook(Book book)
         {
             var books=await _bookRepository.Get(book.BookId);
@@ -56,7 +69,6 @@ namespace BOOKSTORE.Services
                 books.Author = book.Author;
                 books.Description = book.Description;
                 books.Price = book.Price;
-                books.BookCategories=book.BookCategories;
                 books.StockQuantity=book.StockQuantity;
                 books.Title=book.Title;
                 books=await _bookRepository.Update(book);

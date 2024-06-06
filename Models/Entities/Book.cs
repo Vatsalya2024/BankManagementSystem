@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ViewEngines;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BOOKSTORE.Models.Entities
 {
@@ -15,9 +16,11 @@ namespace BOOKSTORE.Models.Entities
         public  string Isbn { get; set; }
         public decimal Price { get; set; }
         public int StockQuantity { get; set; }
+        public int CategoryId { get; set; }
+        [ForeignKey("CategoryId")]
+        public Category? Category { get; set; }
 
 
-        public ICollection<BookCategory>? BookCategories { get; set; }
         public ICollection<CartItem>? CartItems { get; set; }
         public ICollection<OrderItem>? OrderItems { get; set; }
         public ICollection<Review>? Reviews { get; set; }

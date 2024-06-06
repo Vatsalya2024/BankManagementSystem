@@ -58,7 +58,7 @@ namespace BOOKSTORE.Repository
 
         public Task<List<Category>?>? GetAll()
         {
-            var getCategories = _bookStoreDBContext.Categories.Include(a => a.BookCategories).ToListAsync();
+            var getCategories = _bookStoreDBContext.Categories.ToListAsync();
             if (getCategories == null)
             {
                 return null;
